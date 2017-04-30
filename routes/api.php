@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('store', 'CommandController@store');
 Route::get('commands', 'CommandController@index');
+Route::put('command/update/{command}', 'CommandController@update');
 Route::delete('command/delete/{command}', 'CommandController@destroy');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
