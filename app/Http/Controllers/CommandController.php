@@ -9,14 +9,14 @@ class CommandController extends Controller
 {
     public function store(Request $request)
     {
-        $command = Command::create($request->only(['title', 'command', 'description']));
-        // try {
-        // } catch (Exception $e) {
-        //     return response([
-        //         'message' => 'Error on create command!'
-        //     ], 500);
-        // }
+        try {
+            $command = Command::create($request->only(['title', 'command', 'description']));
+        } catch (Exception $e) {
+            return response([
+                'message' => 'Error on create command!'
+            ], 500);
+        }
 
-        return response([], 201);
+        return response(compact('command'), 201);
     }
 }
