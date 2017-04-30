@@ -15,7 +15,7 @@ class CreateVimCommandTest extends TestCase
     /** @test */
     function can_create_a_command()
     {
-        $command = factory(Command::class)->make();
+        $command = $this->makeCommand();
 
         $this->post('/api/store', $command->toArray());
 
@@ -25,7 +25,7 @@ class CreateVimCommandTest extends TestCase
     /** @test */
     function when_create_a_command_then_the_created_command_shold_be_returned_with_the_created_status_code()
     {
-        $command = factory(Command::class)->make();
+        $command = $this->makeCommand();
 
         $this->post('/api/store', $command->toArray())
             ->assertStatus(201)
@@ -35,7 +35,7 @@ class CreateVimCommandTest extends TestCase
     /** @test */
     function a_command_must_have_a_title()
     {
-        $command = factory(Command::class)->make(['title' => null]);
+        $command = $this->makeCommand(['title' => null]);
 
         $this->post('/api/store', $command->toArray())
             ->assertSessionHasErrors(['title']);
@@ -44,7 +44,7 @@ class CreateVimCommandTest extends TestCase
     /** @test */
     function a_command_must_have_a_command()
     {
-        $command = factory(Command::class)->make(['command' => null]);
+        $command = $this->makeCommand(['command' => null]);
 
         $this->post('/api/store', $command->toArray())
             ->assertSessionHasErrors(['command']);
@@ -53,9 +53,16 @@ class CreateVimCommandTest extends TestCase
     /** @test */
     function a_command_must_have_a_description()
     {
-        $command = factory(Command::class)->make(['description' => null]);
+
+
+        $command = $this->makeCommand(['description' => null]);
 
         $this->post('/api/store', $command->toArray())
             ->assertSessionHasErrors(['description']);
+    }
+
+    protected function makeCommand($attributes = [])
+    {
+        return factory(Command::class)->make($attributes);
     }
 }
