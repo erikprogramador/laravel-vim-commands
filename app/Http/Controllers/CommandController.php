@@ -30,4 +30,13 @@ class CommandController extends Controller
 
         return response(compact('command'), 201);
     }
+
+    public function destroy(Command $command)
+    {
+        $command->delete();
+
+        return response([
+            'message' => 'The record was deleted with success!'
+        ], 410);
+    }
 }
