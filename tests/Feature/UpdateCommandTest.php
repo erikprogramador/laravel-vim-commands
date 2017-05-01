@@ -12,7 +12,7 @@ class UpdateCommandTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected $url = '/api/command/update/';
+    protected $url = '/api/command/';
 
     /** @test */
     function can_update_a_existing_command()

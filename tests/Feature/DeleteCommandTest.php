@@ -12,12 +12,14 @@ class DeleteCommandTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $url = '/api/command/';
+
     /** @test */
     function delete_a_existing_vim_command()
     {
         $command = factory(Command::class)->create();
 
-        $this->delete('/api/command/delete/' . $command->id)
+        $this->delete($this->url . $command->id)
             ->assertStatus(410)
             ->assertJsonFragment([
                 'message' => 'The record was deleted with success!'
@@ -29,7 +31,7 @@ class DeleteCommandTest extends TestCase
     /** @test */
     function can_not_delete_a_command_which_not_exits()
     {
-        $this->delete('/api/command/delete/22')
+        $this->delete($this->url . '22')
             ->assertStatus(404);
     }
 }
