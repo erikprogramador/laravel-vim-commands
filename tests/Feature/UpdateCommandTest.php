@@ -58,7 +58,6 @@ class UpdateCommandTest extends TestCase
         $this->assertEquals($newTitle, $command->title);
         $this->assertEquals($newCommand, $command->command);
         $this->assertEquals($newDescription, $command->description);
-       
     }
 
     /** @test */
@@ -89,7 +88,7 @@ class UpdateCommandTest extends TestCase
         $information = [
             'id' => $command->id,
             'title' => $newTitle,
-            'command' => null, 
+            'command' => null,
             'description' => $newDescription
         ];
 
@@ -108,11 +107,10 @@ class UpdateCommandTest extends TestCase
             'id' => $command->id,
             'title' => $newTitle,
             'command' => $newCommand,
-            'description' => null 
+            'description' => null
         ];
 
         $this->put($this->url . $command->id, $information)
             ->assertSessionHasErrors(['description']);
     }
-
 }

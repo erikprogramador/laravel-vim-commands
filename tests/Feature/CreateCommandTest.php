@@ -53,8 +53,6 @@ class CreateVimCommandTest extends TestCase
     /** @test */
     function a_command_must_have_a_description()
     {
-
-
         $command = $this->makeCommand(['description' => null]);
 
         $this->post('/api/store', $command->toArray())
