@@ -21,8 +21,8 @@
                         {{ command.description }}
                     </p>
                     <div slot="footer" class="text-right">
-                        <button class="btn btn-warning btn-xs">Update</button>
-                        <button class="btn btn-danger btn-xs">Delete</button>
+                        <button class="btn btn-warning btn-xs" @click.prevent="updateCommand(command)">Update</button>
+                        <button class="btn btn-danger btn-xs" @click.prevent="deleteCommand(command)">Delete</button>
                     </div>
                 </panel>
             </div>
@@ -51,12 +51,29 @@
                 this.filter = '';
             },
             create () {
-                console.log('create')
+                console.log('create');
+            },
+            updateCommand (command) {
+                console.log(command);
+            },
+            deleteCommand (command) {
+                const index = this.commands.indexOf(command);
+                axios.delete(`/api/command/${command.id}`)
+                    .then(response => {
+                        console.log('I will display a message!');
+                    })
+                    .catch(response => {
+                        console.error('I will display a message!');
+                    });
+                this.commands.splice(index, 1);
+            },
+            getCommands () {
+                axios.get('/api/commands')
+                    .then(({ data }) => this.commands = data);
             }
         },
         mounted () {
-            axios.get('/api/commands')
-                .then(({ data }) => this.commands = data);
+            this.getCommands();
         }
     }
 </script>
