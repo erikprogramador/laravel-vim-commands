@@ -43,7 +43,7 @@ class CommandController extends Controller
 
         return response([
             'message' => 'The record was deleted with success!'
-        ], 410);
+        ], 200);
     }
 
     public function validateRequest(Request $request)

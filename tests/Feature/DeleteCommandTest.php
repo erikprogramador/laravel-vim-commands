@@ -20,7 +20,7 @@ class DeleteCommandTest extends TestCase
         $command = factory(Command::class)->create();
 
         $this->delete($this->url . $command->id)
-            ->assertStatus(410)
+            ->assertStatus(200)
             ->assertJsonFragment([
                 'message' => 'The record was deleted with success!'
             ]);
