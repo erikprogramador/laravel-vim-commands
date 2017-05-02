@@ -1,40 +1,25 @@
 <template>
     <div class="container">
+        <heading />
         <div class="row">
-            <div class="page-header">
-                <h1>Vim snippets</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
+            <aside class="col-md-3">
                 <links @resetState="resetState" @create="create" />
-            </div>
-            <div class="col-md-9">
+            </aside>
+            <section class="col-md-9">
                 <input class="form-control" v-model="filter" placeholder="Search by a snippet title" />
                 <hr>
-                <panel v-for="command in filteredCommands" key="command.id">
-                    <div slot="header" class="flex">
-                        <span class="flex-1">{{ command.title }}</span>
-                        <strong>{{ command.command }}</strong>
-                    </div>
-                    <p>
-                        {{ command.description }}
-                    </p>
-                    <div slot="footer" class="text-right">
-                        <button class="btn btn-warning btn-xs" @click.prevent="updateCommand(command)">Update</button>
-                        <button class="btn btn-danger btn-xs" @click.prevent="deleteCommand(command)">Delete</button>
-                    </div>
-                </panel>
-            </div>
+                <single-command v-for="command in filteredCommands" key="command.id" :command="command" @deleted="deleted" />
+            </section>
         </div>
     </div>
 </template>
 
 <script>
-    import Panel from './Panel.vue';
     import Links from './Links.vue';
+    import SingleCommand from './SingleCommand.vue';
+    import Heading from './Heading.vue';
     export default {
-        components: { Panel, Links },
+        components: { Links, SingleCommand, Heading },
         data () {
             return {
                 commands: [],
@@ -53,36 +38,16 @@
             create () {
                 console.log('create');
             },
-            updateCommand (command) {
-                console.log(command);
-            },
-            deleteCommand (command) {
+            deleted (command) {
                 const index = this.commands.indexOf(command);
-                axios.delete(`/api/command/${command.id}`)
-                    .then(response => {
-                        console.log('I will display a message!');
-                    })
-                    .catch(response => {
-                        console.error('I will display a message!');
-                    });
-                this.commands.splice(index, 1);
-            },
-            getCommands () {
-                axios.get('/api/commands')
-                    .then(({ data }) => this.commands = data);
+                const removed = this.commands.splice(index, 1);
             }
         },
         mounted () {
-            this.getCommands();
+            axios.get('/api/commands')
+                .then(({ data }) => this.commands = data);
         }
     }
 </script>
 
-<style scoped>
-    .flex {
-        display: flex;
-    }
-    .flex-1 {
-        flex: 1;
-    }
-</style>
+<style scoped></style>

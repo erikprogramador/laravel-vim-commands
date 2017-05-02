@@ -22,6 +22,7 @@
 <body>
     <div id="app">
         @yield('content')
+        <notification message="{{ session('flash') }}"></notification>
     </div>
 
     <script src="{{ mix('js/app.js') }}" async></script>
