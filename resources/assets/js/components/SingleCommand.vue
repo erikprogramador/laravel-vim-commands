@@ -34,10 +34,10 @@
             deleteCommand () {
                 axios.delete(`/api/command/${this.command.id}`)
                     .then(response => {
-                        console.log('I will display a message!');
+                        flash('The command was deleted with success!');
                     })
-                    .catch(response => {
-                        console.error('I will display a message!');
+                    .catch(error => {
+                        flash('Something went wrong when delete the command!');
                     });
                 this.$emit('deleted', this.command);
             },

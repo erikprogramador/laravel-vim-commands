@@ -38,12 +38,12 @@
 				this.isUpdating = true;
 				axios.put(`/api/command/${this.command.id}`, this.commandInfo)
 					.then(({ data }) => {
-						console.log('Display a notification here!');
+						flash('Command updated with success!');
 						this.isUpdating = false;
 						this.$emit('updated', data);
 					})
 					.catch(error => {
-						console.error('Display a notification here!');
+						flash('Something went wrong when delete the command!');
 						this.isUpdating = false;
 					});
 			}
