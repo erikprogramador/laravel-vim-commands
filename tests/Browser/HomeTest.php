@@ -71,4 +71,21 @@ class HomeTest extends DuskTestCase
                     ->assertInputValueIsNot($field, $text); 
         });
     }
+
+    /** @test */
+    function when_goes_to_the_home_page_i_should_see_all_the_commands()
+    {
+        $commands = factory(Command::class, 2)->create();
+
+        $this->browse(function (Browser $browser) use ($commands) {
+            $browser->visit('/')
+                    ->assertSee($commands->first()->title)
+                    ->assertSee($commands->first()->command)
+                    ->assertSee($commands->first()->description)
+                    ->assertSee($commands->last()->title)
+                    ->assertSee($commands->last()->command)
+                    ->assertSee($commands->last()->description);       
+        });
+        
+    }
 }
