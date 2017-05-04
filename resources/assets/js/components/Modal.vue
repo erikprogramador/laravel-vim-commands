@@ -1,5 +1,5 @@
 <template>
-	<div class="modal fade" :class="{ 'modal-open': isOpen }" tabindex="-1" role="dialog">
+    <div class="modal fade" :class="{ 'in': isOpen, 'modal-visible': isOpen }" :style="{ display: isOpen ? 'block' : 'none' }" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<header class="modal-header">
