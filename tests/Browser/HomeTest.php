@@ -36,4 +36,18 @@ class HomeTest extends DuskTestCase
                     ->assertSeeLink('Reset Page');
         });
     }
+
+    /** @test */
+    function check_if_when_type_to_the_search_input_and_click_on_reset_link_the_input_is_clean()
+    {
+        $this->browse(function (Browser $browser) {
+            $text = 'Create command';
+            $field = '#search';
+            $browser->visit('/')
+                    ->type($field, $text)
+                    ->assertInputValue($field, $text)
+                    ->clickLink('Reset Page')
+                    ->assertInputValueIsNot($field, $text); 
+        });
+    }
 }

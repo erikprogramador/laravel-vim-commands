@@ -7,7 +7,7 @@
                 <links @resetState="resetState" @create="create" />
             </aside>
             <section class="col-md-9">
-                <input class="form-control" v-model="filter" placeholder="Search by a snippet title" />
+                <input class="form-control" id="search" v-model="filter" placeholder="Search by a snippet title" />
                 <hr>
                 <single-command v-for="command in filteredCommands" key="command.id" :command="command" @deleted="deleted" />
             </section>
