@@ -2096,6 +2096,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -2147,7 +2148,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this3 = this;
 
-        axios.get('/api/commands').then(function (_ref2) {
+        axios.get('http://localhost:8000/api/commands').then(function (_ref2) {
             var data = _ref2.data;
             return _this3.commands = data;
         });
@@ -4767,7 +4768,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 42 */
@@ -32721,7 +32722,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "deleted": _vm.deleted
       }
     })
-  })], 2)])], 1)
+  }), _vm._v(" "), (_vm.filteredCommands.length <= 0) ? _c('h1', {
+    staticClass: "no-content"
+  }, [_vm._v("Sorry But no commands was found!")]) : _vm._e()], 2)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

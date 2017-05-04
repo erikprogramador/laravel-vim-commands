@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Command;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -34,6 +35,26 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                     ->assertSeeLink('Reset Page');
+        });
+    }
+
+    /** @test */
+    function verify_if_when_dont_have_commands_the_home_should_show_a_message()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->assertVisible('.no-content');
+        });
+    }
+
+
+    /** @test */
+    function verify_if_when_have_commands_the_home_should_not_show_a_message()
+    {
+        $command = factory(Command::class)->create();
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                    ->assertMissing('.no-content');
         });
     }
 

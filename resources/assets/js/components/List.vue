@@ -10,6 +10,7 @@
                 <input class="form-control" id="search" v-model="filter" placeholder="Search by a snippet title" />
                 <hr>
                 <single-command v-for="command in filteredCommands" key="command.id" :command="command" @deleted="deleted" />
+                    <h1 class="no-content" v-if="filteredCommands.length <= 0">Sorry But no commands was found!</h1>
             </section>
         </div>
     </div>
@@ -55,7 +56,7 @@
             }
         },
         mounted () {
-            axios.get('/api/commands')
+            axios.get('http://localhost:8000/api/commands')
                 .then(({ data }) => this.commands = data);
         }
     }
