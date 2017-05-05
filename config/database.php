@@ -38,6 +38,12 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
+        
+        'testsqlite' => [
+            'driver' => 'sqlite',
+            'database' => env('DB_DATABASE', database_path('test.sqlite')),
+            'prefix' => '',
+        ],
 
         'mysql' => [
             'driver' => 'mysql',
