@@ -5,13 +5,28 @@ namespace App\Http\Controllers;
 use App\Command;
 use Illuminate\Http\Request;
 
+/**
+ * Class: CommandController
+ *
+ * @author Erik Vanderlei Fernandes <erik.vanderlei.programador@outlook.com>
+ * @see Controller
+ */
 class CommandController extends Controller
 {
+    /**
+     * Return a list of all commands
+     *
+     */
     public function index()
     {
         return Command::all();
     }
 
+    /**
+     * Store a command
+     *
+     * @param Request $request
+     */
     public function store(Request $request)
     {
         $this->validateRequest($request);
@@ -27,6 +42,12 @@ class CommandController extends Controller
         return response(compact('command'), 201);
     }
 
+    /**
+     * Update a command
+     *
+     * @param Request $request
+     * @param Command $command
+     */
     public function update(Request $request, Command $command)
     {
         $this->validateRequest($request);
@@ -37,6 +58,11 @@ class CommandController extends Controller
         return response($command, 200);
     }
 
+    /**
+     * Delete a command from database
+     *
+     * @param Command $command
+     */
     public function destroy(Command $command)
     {
         $command->delete();
@@ -46,7 +72,12 @@ class CommandController extends Controller
         ], 200);
     }
 
-    public function validateRequest(Request $request)
+    /**
+     * Validate the request
+     *
+     * @param Request $request
+     */
+    protected function validateRequest(Request $request)
     {
         $this->validate($request, [
             'title' => 'required|max:255',
